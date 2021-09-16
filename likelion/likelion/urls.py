@@ -16,9 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog import views
-
+# import
+from django.conf import settings
+# import
+from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView,LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('<int:item_id>/', views.list, name="list"),
-]
+    path('login/',LoginView.as_view(),name="login"),
+    path('logout/',LogoutView.as_view(),name="logout"),
+    # category_id 도 같이 보내줌
+    path('post_like_toggle/<int:item_id>/<int:category_id>',views.post_like_toggle,name="post_like_toggle"),
+]+ static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

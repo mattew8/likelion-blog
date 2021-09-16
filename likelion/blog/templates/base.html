@@ -7,11 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
     <title>Document</title>
+    {% block head %}{% endblock %}
 </head>
 <body>
     <main>
         <nav>
-            네브바가 들어갈 공간
+            <div class="nav-container">
+                <div class="nav-title">
+                    <a href= "{% url 'index' %}">name's portfolio</a>
+                </div>
+               
+                <div class="nav-content">
+                    <div class="nav-search"><input type="search" placeholder="검색바가 들어갈 공간" aria-label="Search"/></div>
+                    <div class="nav-link">
+                    <div class="github"><a href="#">github</a></div>
+                    <div class="blog"><a href="#">blog</a></div>
+                </div>
+                </div>
+            </div>
         </nav>
         
         <div id="container">

@@ -1,17 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<head>
-    <title>Document</title>
+{% block head %}
+    <title>index</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
-</head>
+{% endblock %}
 
     {% block menu %}
         {% for category in categories %}
-            <div>
+            <div class="menu-category">
                 <a href="{% url 'list' category.id %}">{{category.subject}}</a>
             </div>
+            
         {% endfor %}
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
+            <div>프로젝트</div>
     {% endblock %}
 
     {% block content %}

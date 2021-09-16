@@ -5,11 +5,32 @@
     {% block menu %}
     <!-- 메뉴에 해당하는 구멍 -->
         카테고리 : {{selected_category}}
+        
     {% endblock %}
 
     {% block content %}
     <!-- 컨텐츠에 해당하는 구멍 -->
         {% for post in posts %}
+           
             <div>제목 : {{post.title}}</div>
+            <div>내용 : {{post.content}}</div>
+            {% if post.image %}
+            <img src="{{post.image.url}}" />
+            {% endif %}
+            <hr>
+             
+            <div>좋아요 수 : {{post.like_count}}</div>
+            <!-- 카테고리 아이디 붙여서 들고와주기  -->
+            <!-- 여기서 selected_category 는 list 에서 context 로 들고온 변수 -->
+            <a href="{% url 'post_like_toggle' post.id selected_category.id %}">
+            {% if post in profile.like_post.all %}
+            취소
+            {% else %}
+            좋아요
+            {% endif %}
+        </a>
         {% endfor %}
+    
+       
+ 
     {% endblock %}
