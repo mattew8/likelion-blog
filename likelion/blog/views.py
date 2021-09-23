@@ -54,20 +54,6 @@ def post_like_toggle(request,item_id,category_id):
     return redirect('list',category_id)
 
 
-# def search(request):
-#     # id값으로 내림차순
-#     post_list = Post.objects.order_by('-id')
-#     # q 값이 없으면 빈문자열 리턴
-#     # ?=q get 방식
-#     search_keyowrd = request.GET.get('q','')
- 
-#     if search_keyowrd:
-#         # icontaines 는 대소문자 구분없이
-#         post_list = post_list.filter(title__icontains = search_keyowrd)| post_list.filter(content__icontains = search_keyowrd)
-#         return render(request,'search.html',{'post_list':post_list})
-#     else:
-#         return render(request,'search.html')
-   
 
 def search(request):
     post_list = Post.objects.order_by('-id')

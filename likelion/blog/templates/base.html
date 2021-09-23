@@ -18,11 +18,7 @@
                 </div>
                
                 <div class="nav-content">
-                    <!-- <div class="nav-search"><input type="search" placeholder="검색바가 들어갈 공간" aria-label="Search"/></div> -->
-                    <!-- <form id="nav-search" action="{% url 'search' %}">
-                        <input type="search" placeholder="검색바가 들어갈 공간" name ="q" value="{{q}}" aria-label="Search" id="search"/>
-                        <button type="submit">검색</button>
-                    </form> -->
+                
                     <form id="nav-search" action="{% url 'search' %}">
                         <input id="search" type="search" placeholder="검색어를 입력해주세요." name="q" value="{{q}}" aria-label="Search" />
                         <button type="submit">검색</button>
@@ -46,24 +42,7 @@
             </div>
         </div>
     </main>
-    <!-- <script>
-       const input = document.getElementById('search');
-       const searchForm = document.getElementById('nav-search');
-        // console.log(input);
-        // console.log(searchForm);
 
-        function warringMessage(e){
-            // e.preventDefault();
-            // console.log(input.value.length);
-            if (input.value.length < 2){
-                // submit event 멈춰!
-                e.preventDefault();
-                alert('검색어는 두 글자 이상으로 입력해주세요!')
-            }
-        }
-        searchForm.addEventListener('submit',warringMessage)
-    
-    </script> -->
     <script>
         const input = document.getElementById('search');
         const searchForm = document.getElementById('nav-search');
