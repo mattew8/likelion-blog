@@ -70,20 +70,30 @@ nav {
   align-items: center;
 }
 
-.nav-content .nav-search,
+.nav-content #nav-search,
 .nav-link a {
   font-size: 1.6rem;
 }
 
-.nav-search {
+#nav-search {
   width: 60%;
-  /* border: 1px solid black; */
+  display: flex;
   margin-right: 5%;
 }
 
-.nav-search input {
+#nav-search button{
+  margin-left: 5%;
+  width: 30%;
+}
+
+#nav-search input {
   width: 100%;
   font-size: 1.6rem;
+}
+/* placeholder font size, padding */
+#nav-search input::placeholder {
+  padding-left: 5%;
+  font-size: 1.2rem;
 }
 
 .nav-link {

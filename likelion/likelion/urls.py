@@ -29,4 +29,5 @@ urlpatterns = [
     path('logout/',LogoutView.as_view(),name="logout"),
     # category_id 도 같이 보내줌
     path('post_like_toggle/<int:item_id>/<int:category_id>',views.post_like_toggle,name="post_like_toggle"),
+    path('search/',views.search, name="search"),
 ]+ static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

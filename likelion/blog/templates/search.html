@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if not post_list %}
+<div>
+    <h1>검색 결과 없음~~~</h1>
+</div>
+{% else %}
+    {% for post in post_list %}
+    <div>제목: {{post.title}}</div>
+    <div>내용: {{post.content}}</div>
+        {% if post.image %}
+                <img src="{{post.image.url}}" />
+        {% endif %}
+        <hr>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

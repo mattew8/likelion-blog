@@ -52,3 +52,33 @@ def post_like_toggle(request,item_id,category_id):
         post.save()
     # post id 로 가는게 아니라 해당 카테고리로 가야함.
     return redirect('list',category_id)
+
+
+# def search(request):
+#     # id값으로 내림차순
+#     post_list = Post.objects.order_by('-id')
+#     # q 값이 없으면 빈문자열 리턴
+#     # ?=q get 방식
+#     search_keyowrd = request.GET.get('q','')
+ 
+#     if search_keyowrd:
+#         # icontaines 는 대소문자 구분없이
+#         post_list = post_list.filter(title__icontains = search_keyowrd)| post_list.filter(content__icontains = search_keyowrd)
+#         return render(request,'search.html',{'post_list':post_list})
+#     else:
+#         return render(request,'search.html')
+   
+
+def search(request):
+    post_list = Post.objects.order_by('-id')
+    search_keyword = request.GET.get('q','')
+    # 해당 인풋에 적은 검색 키워드가 있으면
+    if search_keyword:
+        # title,content 에 search keyword 가 있는 post 오브젝트들만 가지고 와주세여
+        post_list = post_list.filter(title__icontains = search_keyword)| post_list.filter(content__icontains = search_keyword)
+        return render(request,'search.html',{'post_list':post_list})
+    # 없으면 그냥 search.html render
+    else:
+        return render(request,'search.html')
+
+   
