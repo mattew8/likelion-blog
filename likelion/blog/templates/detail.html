@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+    
+    {% block menu %}
+    <!-- 메뉴에 해당하는 구멍
+        카테고리 : {{selected_category}}
+         -->
+    {% endblock %}
+
+    {% block content %}
+    <!-- 컨텐츠에 해당하는 구멍 -->
+    {{ post.title}}<br>
+    {{ post.content}}
+    <h1>Comment</h1>
+    {% for comment in post.post_comment.all %}
+    <div>
+         author:{{comment.author}}
+         content:{{comment.content}}<br>
+         <button id="{{comment.id}}" onClick="hh(event)">수정하기</button>
+         <a href="{% url 'delete' post.id comment.id %}"><button>삭제</button></a>
+         <form id="form{{comment.id}}" action="{% url 'update' post.id comment.id %}" method="POST" style="display: none;">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type="submit">댓글수정</button>
+        </form>
+    </div>
+    {% endfor %}
+    <hr>
+    <form action="{% url 'comment' post.id %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">댓글작성</button>
+    </form>
+    
+       
+    {% endblock %}
+    {% block script %}
+    <script>
+        function hh(e){
+            const form = document.querySelector(`#form${e.target["id"]}`);
+            form.style.display="block";
+        }
+    </script>
+    {% endblock %}

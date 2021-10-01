@@ -11,9 +11,9 @@
     {% block content %}
     <!-- 컨텐츠에 해당하는 구멍 -->
         {% for post in posts %}
-           
+        <a href="{% url 'detail' post.id %}"><div>
             <div>제목 : {{post.title}}</div>
-            <div>내용 : {{post.content}}</div>
+            <div>내용 : {{post.content | safe }}</div>
             {% if post.image %}
             <img src="{{post.image.url}}" />
             {% endif %}
@@ -29,6 +29,7 @@
             좋아요
             {% endif %}
         </a>
+    </div></a>
         {% endfor %}
     
        

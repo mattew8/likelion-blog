@@ -26,6 +26,7 @@
                     <div class="nav-link">
                     <div class="github"><a href="#">github</a></div>
                     <div class="blog"><a href="#">blog</a></div>
+                    <div class="write"><a href="{% url 'write' %}">글작성</a></div>
                 </div>
                 </div>
             </div>
@@ -42,6 +43,9 @@
             </div>
         </div>
     </main>
+    
+    {% block script %}
+    {% endblock %}
 
     <script>
         const input = document.getElementById('search');

@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from blog import views
 # import
 from django.conf import settings
@@ -30,4 +30,10 @@ urlpatterns = [
     # category_id 도 같이 보내줌
     path('post_like_toggle/<int:item_id>/<int:category_id>',views.post_like_toggle,name="post_like_toggle"),
     path('search/',views.search, name="search"),
+    path('summernote/',include('django_summernote.urls')),
+    path('write/',views.write,name="write"),
+    path('detail/<int:post_id>',views.detail,name="detail"),
+    path('detail/<int:post_id>/comment',views.comment_write,name="comment"),
+    path('detail/<int:post_id>/delete_comment/<int:item_id>',views.comment_delete,name="delete"),
+    path('detail/<int:post_id>/update_comment/<int:item_id>',views.comment_update,name="update"),
 ]+ static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

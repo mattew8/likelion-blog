@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import *
+from .forms import PostForm,CommentForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -20,11 +21,20 @@ def list(request, item_id):
     # 요청된 유저 
     user = request.user
     # 요청된 유저의 profile
-    profile = Profile.objects.get(user=user)
-    
-    context = {"selected_category": selected_category, "posts": posts,'profile':profile}
+    if not user.is_anonymous:
+        profile = Profile.objects.get(user=user)
+        context = {"selected_category": selected_category, "posts": posts,'profile':profile}
+    else:
+        context = {"selected_category": selected_category, "posts": posts}
 
     return render(request, "list.html", context)
+
+def detail(request,post_id):
+    post = Post.objects.get(pk=post_id)
+    form = CommentForm()
+    context = {'post':post,'form':form}
+
+    return render(request,'detail.html',context)
 
 
 
@@ -66,5 +76,49 @@ def search(request):
     # 없으면 그냥 search.html render
     else:
         return render(request,'search.html')
+
+
+def write(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        if form.is_valid():
+            write = form.save(commit=False)
+            write.profile = profile
+            write.save()
+        return redirect('index')
+    else:
+        form = PostForm()
+    return render(request,'write.html',{'form':form})
+
+def comment_write(request,post_id):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = Post.objects.get(pk=post_id)
+            comment.save()
+    return redirect('detail',post_id)
+
+def comment_delete(request,item_id,post_id):
+    comment = Comment.objects.get(pk=item_id)
+    comment.delete()
+    return redirect('detail',post_id)
+
+def comment_update(request,item_id,post_id):
+    comment = Comment.objects.get(pk=item_id)
+    if request.method == "POST":
+        if request.POST['password'] == comment.password:
+            form = CommentForm(request.POST,instance=comment)
+            if form.is_valid():
+                comment1 = form.save(commit=False)
+                comment1.post = Post.objects.get(pk=post_id)
+                comment1.save()
+        else:
+            return redirect('index')
+    return redirect('detail',post_id)
+
+
 
    
