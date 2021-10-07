@@ -7,12 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
     <title>Document</title>
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
     <main>
         <nav>
             <div class="nav-container">
+                <div id="hamBtn">
+                    햄버거
+                </div>
                 <div class="nav-title">
                     <a href= "{% url 'index' %}">name's portfolio</a>
                 </div>
